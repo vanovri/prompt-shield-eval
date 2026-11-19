@@ -1,0 +1,20 @@
+{
+  "name": "prompt-shield-eval",
+  "version": "1.0.0",
+  "description": "5-layer TypeScript LLM prompt injection defense-in-depth engine, 16-ID OWASP LLM01 eval harness, and anti-ReDoS fuzz suite.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "eval": "npm run build --silent && node dist/cli-eval.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
