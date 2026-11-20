@@ -1,20 +1,74 @@
 {
   "name": "prompt-shield-eval",
-  "version": "1.0.0",
-  "description": "5-layer TypeScript LLM prompt injection defense-in-depth engine, 16-ID OWASP LLM01 eval harness, and anti-ReDoS fuzz suite.",
+  "version": "1.1.0",
+  "description": "5-layer TypeScript LLM prompt injection defense-in-depth engine with optional ONNX INT8 Cascade Semantic Layer (L3.5) and MCP Middleware Guardrail.",
   "license": "MIT",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "models",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./semantic": {
+      "types": "./dist/semantic/index.d.ts",
+      "import": "./dist/semantic/index.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp/index.d.ts",
+      "import": "./dist/mcp/index.js"
+    }
+  },
+  "bin": {
+    "prompt-shield-eval": "./dist/cli-eval.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "onnxruntime-node": "^1.20.0"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/sdk": {
+      "optional": true
+    },
+    "onnxruntime-node": {
+      "optional": true
+    }
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\" --max-warnings=0",
     "test": "vitest run",
+    "test:core": "vitest run test/security-suite.test.ts test/fuzz-redos.test.ts test/session-taint.test.ts",
+    "test:semantic": "vitest run test/semantic-onnx.test.ts",
+    "test:mcp": "vitest run test/mcp-adapter.test.ts",
     "test:watch": "vitest",
-    "eval": "npm run build --silent && node dist/cli-eval.js"
+    "eval": "npm run build --silent && node dist/cli-eval.js",
+    "eval:semantic": "npm run build --silent && node dist/cli-eval.js --with-semantic",
+    "eval:mcp": "npm run build --silent && node dist/cli-eval.js --suite mcp",
+    "verify:zero-deps": "npm run build --silent && node scripts/verify-core-zero-deps.mjs"
   },
   "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@modelcontextprotocol/sdk": "^1.12.0",
     "@types/node": "^22.0.0",
+    "eslint": "^9.20.0",
+    "onnxruntime-node": "^1.21.0",
     "typescript": "^5.7.0",
-    "vitest": "^3.0.0"
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.0",
+    "zod": "^3.24.2"
   }
 }
