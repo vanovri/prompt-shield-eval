@@ -90,7 +90,7 @@ const RULES: RuleSpec[] = [
     id: "PI-14C-ide-repo-injection",
     weight: 40,
     pattern:
-      /(?:(?:\/\/|#|\/\*)\s*(?:ai(?:\s+assistant)?|assistant|copilot|cursor|llm|agent|system)\s*[:\-].{0,95}\b(?:backdoor|secretly\s+add|diam-diam\s+tambahkan|exfiltrate|kirim\s+\.env|disable\s+auth|bypass\s+auth|ignore\s+security)\b|\b(?:whenever\s+you\s+write\s+new\s+code|setiap\s+kali\s+menulis\s+kode).{0,80}\b(?:backdoor|secret\s+login|exfiltrate|kirim\s+token)\b)/i,
+      /(?:(?:\/\/|#|\/\*)\s*(?:ai(?:\s+assistant)?|assistant|copilot|cursor|llm|agent|system)\s*[:-].{0,95}\b(?:backdoor|secretly\s+add|diam-diam\s+tambahkan|exfiltrate|kirim\s+\.env|disable\s+auth|bypass\s+auth|ignore\s+security)\b|\b(?:whenever\s+you\s+write\s+new\s+code|setiap\s+kali\s+menulis\s+kode).{0,80}\b(?:backdoor|secret\s+login|exfiltrate|kirim\s+token)\b)/i,
   },
 ];
 

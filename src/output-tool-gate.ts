@@ -109,6 +109,8 @@ export interface ArgRule {
   pattern?: RegExp;
   min?: number;
   max?: number;
+  integer?: boolean;
+  enum?: readonly (string | number | boolean)[];
 }
 
 export interface ToolPolicy {
@@ -171,8 +173,13 @@ export function evaluateToolCall(
     if (rule.type === "number") {
       const num = val as number;
       if (!Number.isFinite(num)) violations.push(`NON_FINITE_NUMBER:${argName}`);
+      if (rule.integer && !Number.isInteger(num)) violations.push(`NON_INTEGER:${argName}`);
       if (rule.min !== undefined && num < rule.min) violations.push(`BELOW_MIN:${argName}`);
       if (rule.max !== undefined && num > rule.max) violations.push(`ABOVE_MAX:${argName}`);
+    }
+
+    if (rule.enum && !rule.enum.includes(val as string | number | boolean)) {
+      violations.push(`INVALID_ENUM:${argName}`);
     }
   }
 

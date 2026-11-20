@@ -1,0 +1,12 @@
+{
+  "version": "1.1.0",
+  "modelFile": "semantic-mini-encoder.int8.onnx",
+  "modelSha256": "057d4b6895579e7bf2ab15a5fc448843107496df9bf07cc2182d46490d85fa33",
+  "centroidsFile": "centroids.v1.json",
+  "centroidsSha256": "a8648a548b3aa87a4ee35b293492a995bf81104e8f81f4a7cf0f7217268453b7",
+  "architecture": "mini-hash-int8",
+  "quantization": "INT8",
+  "featureDim": 1024,
+  "embeddingDim": 64,
+  "maxSeqLen": 256
+}
